@@ -66,7 +66,7 @@ public class RouteGuideServer {
     File chainFile = new File(chainPath);
     File keyFile = new File(keyPath);
     server = serverBuilder.addService(new RouteGuideService(features))
-        .useTransportSecurity(keyFile, chainFile)
+        .useTransportSecurity(chainFile, keyFile)
         .build();
   }
 
