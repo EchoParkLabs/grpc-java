@@ -60,7 +60,12 @@ public class RouteGuideServer {
   /** Create a RouteGuide server using serverBuilder as a base and features as data. */
   public RouteGuideServer(ServerBuilder<?> serverBuilder, int port, Collection<Feature> features) {
     this.port = port;
+    String chainPath = System.getenv("GRPC_CHAIN");
+    String keyPath = System.getenv("GRPC_KEY");
+    File chainFile = new File(chainPath);
+    File keyFile = new File(keyPath);
     server = serverBuilder.addService(new RouteGuideService(features))
+        .useTransportSecurity(chainFile, keyFile);
         .build();
   }
 
